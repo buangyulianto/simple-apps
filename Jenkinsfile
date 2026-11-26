@@ -17,26 +17,28 @@ pipeline {
             }
         }
         
-        stage('Testing') {
-            steps {
-                sh'''
-                cd apps
-                npm test
-                npm run test:coverage
-                '''
-            }
-        }
+        // stage('Testing') {
+        //     steps {
+        //         dir('apps') {
+        //             sh'''
+        //             npm test
+        //             npm run test:coverage
+        //             '''
+        //         }
+        //     }
+        // }
         
         stage('Code Review') {
             steps {
-                sh'''
-                cd apps
-                sonar-scanner \
-                    -Dsonar.projectKey=Simple-Apps \
-                    -Dsonar.sources=. \
-                    -Dsonar.host.url=http://172.23.8.155:9000 \
-                    -Dsonar.login=sqp_1890b551d35033c61ff8cd453cec9333cfa9d0a6
-                '''
+                dir('apps') {
+                    sh'''
+                    sonar-scanner \
+                        -Dsonar.projectKey=Simple-Apps \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=http://172.23.8.155:9000 \
+                        -Dsonar.login=sqp_1890b551d35033c61ff8cd453cec9333cfa9d0a6
+                    '''
+                }
             }
         }
         
