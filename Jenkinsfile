@@ -17,16 +17,16 @@ pipeline {
             }
         }
         
-        // stage('Testing') {
-        //     steps {
-        //         dir('apps') {
-        //             sh'''
-        //             npm test
-        //             npm run test:coverage
-        //             '''
-        //         }
-        //     }
-        // }
+        stage('Testing') {
+            steps {
+                dir('apps') {
+                    sh'''
+                    npm test
+                    npm run test:coverage
+                    '''
+                }
+            }
+        }
         
         stage('Code Review') {
             steps {
